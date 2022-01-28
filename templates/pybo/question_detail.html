@@ -1,3 +1,10 @@
 <h1>{{question.subject}}</h1>
 
 <div>{{question.content}}</div>
+
+<from action = "{ url 'pybo:answer_create' question_id %}"  method = 'post'>
+    {% csrf_token %}
+    <textarea name = 'content' id='content' row = '15'></textarea>
+    <input type = 'submit' calue = '답변등록'>
+</from>
+

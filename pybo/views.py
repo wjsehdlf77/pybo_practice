@@ -1,6 +1,9 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from webbrowser import get
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Question
-# Create your views here.
+from django.utils import timezone
+
+
 def index(request):
     # print(request)
     """
@@ -26,3 +29,11 @@ def detail(request, question_id):
         'question' : question
     }
     return render(request, 'pybo/question_detail.html', context)
+
+def answer_create(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    question.answer_set.create(content=request.POST.get('content'),
+                    create_date=timezone.now())                     #insert해라
+    return redirect('pybo:detail', question_id=question.id)
+
+#answer_set fk설정 부모 모델에 자동으로 생성
