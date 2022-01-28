@@ -19,12 +19,12 @@
     <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}" />
   </head>
   <body>
-      <div class = "jumbotron mb-0">
-          <h1>pybo를 통한 django학습</h1>
-          <p>django와 bootstrap을 이용한 사이트 구축 학습</p>
+    <div>class="container my-3">
+      <div class="jumbotron mb-0">
+        <h1>pybo를 통한 django학습</h1>
+        <p>django와 bootstrap을 이용한 사이트 구축 학습</p>
       </div>
-      
       {% block content %}{% endblock %}
-
+    </div>
   </body>
 </html>

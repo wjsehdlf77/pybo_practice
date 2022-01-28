@@ -11,8 +11,10 @@ def index(request):
     """
     question_list = Question.objects.order_by('create_date')
     #print(question_list)
+    total_count = Question.objects.count()
     context = {
-        'question_list' : question_list
+        'question_list' : question_list,
+        'total_count' : total_count
         
     }
 
