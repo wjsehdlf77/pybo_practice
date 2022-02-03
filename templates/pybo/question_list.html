@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% comment %} {% load pybo_filter%} {% endcomment %}
+{% block content %}
 
 <table class="table">
   <tread>
@@ -12,24 +14,38 @@
   <tbody>
     {% if question_list %} {% for question in question_list %}
     <tr>
-      <td>{{ forloop.counter}}</td>
+      <td>{{ question.id}}</td>
+              {% comment %} <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+              {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1}} 이걸써두된다 {% endcomment %}
+ 
       <td>
         <a href="{% url 'pybo:detail' question.id %}"> {{question.subject}}</a>
-        <span class="badge badge-pill badge-primary"> {{question.answer_set.count}}</span>
+        <span class="badge badge-pill badge-primary">
+          {{question.answer_set.count}}</span
+        >
       </td>
       <td>{{question.create_date}}</td>
     </tr>
-    {% endfor %} {% else %}
+    {% endfor %} 
+    {% else %}
     <tr>
       <td colspan="3">질문이 없습니다.</td>
     </tr>
     {% endif %}
   </tbody>
 </table>
+
+{% include 'pagination.html' with page_obj=question_list %}
+
+
 <div class="clearfix">
   <div class="float-left">
-    <a href="{% url 'pybo:question_create' %}" class = 'btn btn-primary'><i class="fas da-edit"></i> 질문 등록하기</a>
+    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary"
+      ><i class="fas da-edit"></i> 질문 등록하기</a
+    >
   </div>
-  <div class="text-right">(총 :{{total_count}}건)</div>
+  <div class="text-right float-right">
+    (총 :{{question_list.paginator.count}}건)
+  </div>
 </div>
-{% endblock %}
+{% endblock content %}
