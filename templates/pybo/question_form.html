@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+<!-- action = 전송할 url -> 어느 뷰함수가 처리할지 결정 / action의 디폴트값은 현재 url-->
+
+{% block content %}
+
+<h5 class = 'my-3' border-bottom>질문등록</h5>
+<form method = 'post' class = 'post-form my-3'>
+    {% csrf token %}
+    {{ form.as_p }}
+    <botton type = 'subject' class = 'btn btn-primary'>저장하기</botton>
+</form>
+
+{% endblock %}
