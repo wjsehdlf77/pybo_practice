@@ -1,0 +1,7 @@
+
+
+.jumbotron {
+  background-image: url("image/abc.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
