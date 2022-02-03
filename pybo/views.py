@@ -2,7 +2,7 @@ from webbrowser import get
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Question, Answer
 from django.utils import timezone
-from .forms import QuestionForm
+from .forms import QuestionForm, AnswerForm
 
 
 def index(request):
@@ -36,6 +36,20 @@ def detail(request, question_id):
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+#유효성검사방법
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit = False)
+            answer.create_date = timezone.now()
+            answer.question = question
+            answer.save()
+            return redirect('pybo:detail', question_id = question.id)
+    else:
+        form = AnswerForm()
+    context = {'question' : question, 'form' : form}
+    return render(request, 'pybo/question_detail.html', context)
+
     # content = request.POST['content'] 이건 예외발생
     # content = request.POST.get('content')  #이건 없으면 none을 리턴 두번째인자를 정해주면 정해진값을 리턴
     # question.answer_set.create(content=request.POST.get('content'),
@@ -54,14 +68,29 @@ def answer_create(request, question_id):
 #     answer.save()
 
 #방법2
-    question.answer_set.create(content=request.POST.get('content'),
-                        create_date=timezone.now()) 
+    # question.answer_set.create(content=request.POST.get('content'),
+    #                     create_date=timezone.now()) 
 
-    return redirect('pybo:detail', question_id=question.id)
+    # return redirect('pybo:detail', question_id=question.id)
+
+
 
 def question_create(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit = False)
+            question.create_date = timezone.now()
+            question.save()
+            return redirect('pybo:index')
+    else:
+        form = QuestionForm()
 
-    form = QuestionForm()
-    return render(request, 'pybo/question_form.html', {'form': form})
+    context = {'form': form}
+    return render(request, 'pybo/question_form.html', context)
 
 
+
+# request.get
+#             둘다 사전
+# request.post

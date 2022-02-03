@@ -1,14 +1,6 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{%static 'bootstrap.min.css'%}" />
+{% extends 'base.html' %}
 
-<link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-  crossorigin="anonymous"
-/>
-
-
+{% block content %}
   <h2 class="border-bottom py-2">{{ question.subject }}</h2>
   <div class="card my-3">
     <div class="card-body">
@@ -37,18 +29,19 @@
     <form action="{% url 'pybo:answer_create' question.id %}" method="post"
         class="my-3">
         {% csrf_token %}
+        {% include 'error/form_error.html' %}
         <div class="form-group">
             <textarea name="content" id="content" class="form-control"
             rows="10"></textarea>
         </div>
-        <input type="submit" value="답변등록" class="btn btn-primary">
         <button type="submit" class='btn btn-primary'><i class='fas fa-list'></i>답변등록</button>
         <a href = "{% url 'pybo:index' %}" class='btn btn-primary'><i class="fas fa-list"></i> 목록 보기</a>
     </form>
+{% endblock %}
 
 
   
-  {% comment %} <h1>{{question.subject}}</h1>
+  <!-- {% comment %} <h1>{{question.subject}}</h1>
 
   <div>{{question.content}}</div>
 
@@ -67,4 +60,4 @@
     <input type="submit" value="답변등록" />
   </form>
   
-</div> {% endcomment %}
+</div> {% endcomment %} -->
