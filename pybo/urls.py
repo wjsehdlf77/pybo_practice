@@ -3,6 +3,8 @@ from . import views
 
 app_name = 'pybo'
 
+
+# Function based view : FNV 함수기반
 urlpatterns = [
     path('', views.index, name ='index'),
     path('<int:question_id>/', views.detail, name='detail'),

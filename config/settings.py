@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pybo',
+    'common.apps.CommonConfig'
 ]
 
 MIDDLEWARE = [
@@ -81,9 +82,13 @@ DATABASES = {
     }
 }
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
+#비밀번호 유효성검사기
 
 AUTH_PASSWORD_VALIDATORS = [
     {
