@@ -21,7 +21,7 @@
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class = 'nav-link' href = "{% url 'common:logout' %}">
-            <img src = "{{baseUrl}}image/{{ user.username }}.png" class = 'avata-sm rounded-circle'/>
+            <li><img src = "{{baseUrl}}image/{{ user.username }}.png" class = 'avata-sm rounded-circle'/>
           {{ user.username }}<i class="fas fa-sign-in-alt"></i>(로그아웃)
           </a>
         </li>
