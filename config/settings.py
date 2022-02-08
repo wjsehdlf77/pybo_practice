@@ -77,11 +77,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'pybo_db',
+        'USER': 'doyle',
+        'PASSWORD': '54055405',     # iot 사용자의 비밀번호 입력
+        'HOST': 'localhost',      # 데이터베이스의 서버 주소
+        'PORT': ''                      # 데이터베이스의 포트번호, 생략시 디폴트 포트번호
     }
 }
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
